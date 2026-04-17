@@ -1,0 +1,61 @@
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cbcl-nautilus"
+version = "0.1.0"
+description = "NautilusTrader scaffold for Coinbase-vs-Chainlink divergence strategies on Polymarket."
+readme = "README.md"
+requires-python = ">=3.12,<3.15"
+dependencies = [
+  "nautilus_trader[polymarket]",
+  "httpx>=0.28,<0.29",
+  "pydantic>=2.11,<3.0",
+  "websockets>=15,<16",
+]
+
+[project.scripts]
+cbcl-platform = "cbcl_platform.cli:console_entrypoint"
+start-live = "cbcl_platform.cli:start_live_cli"
+start-paper = "cbcl_platform.cli:start_paper_cli"
+start-dashboard = "cbcl_platform.cli:start_dashboard_cli"
+run-replay = "cbcl_platform.cli:run_replay_cli"
+run-backtest = "cbcl_platform.cli:run_backtest_cli"
+cbcl-live = "cbcl_platform.cli:start_live_cli"
+cbcl-paper = "cbcl_platform.cli:start_paper_cli"
+cbcl-backtest = "cbcl_platform.cli:run_backtest_cli"
+
+[dependency-groups]
+dev = [
+  "pytest>=8.3,<9.0",
+  "pytest-cov>=6.0,<7.0",
+  "ruff>=0.11,<0.12",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cbcl_platform"]
+include = ["src/cbcl_platform/dashboard_assets/**/*"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/src/cbcl_platform",
+  "/tests",
+  "/README.md",
+  "/docs",
+]
+
+[tool.pytest.ini_options]
+addopts = "-q -p no:anyio"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.ruff.lint]
+select = ["B", "E", "F", "I", "SIM", "UP"]

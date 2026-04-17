@@ -1,0 +1,32 @@
+name: Bug report
+description: Report a defect in the trading stack, data pipeline, or dashboard.
+title: "[Bug] "
+labels:
+  - bug
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What failed, and where did it fail?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Exact steps, environment, and mode (`backtest`, `paper`, or `live`).
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Logs or screenshots
+      description: Include error output, dashboard screenshots, or event IDs if available.
+
